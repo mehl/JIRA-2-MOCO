@@ -1,0 +1,15 @@
+{
+    "name": "conrad-jira-2-moco",
+    "version": "1.0.0",
+    "description": "",
+    "main": "js/index.js",
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "ansi-colors": "^4.1.3",
+        "drawille-canvas": "^1.2.1",
+        "prompts": "^2.4.2",
+        "xlsx-parse-json": "^2.0.2",
+        "xslx": "^1.0.0"
+    }
+}
