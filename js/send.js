@@ -16,7 +16,7 @@ const renderProgress = (progress, hasError = false) => {
     const c = new Canvas(20, 20);
     for (var i = 0; i < 5; i++) {
         c.beginPath()
-        c.arc(9, 9, 9 - i / 2, -Math.PI / 2, Math.PI * 2 * progress - Math.PI / 2);
+        c.arc(9, 9, 9 - i / 2, -Math.PI / 2, Math.PI * 2 * 1 - Math.PI / 2);
         c.closePath();
         c.stroke();
 
@@ -49,7 +49,7 @@ const sendit = async (item) => {
         headers,
         body: JSON.stringify(payload)
     });
-   // const json = await response.json();
+    // const json = await response.json();
     if (!response.ok) throw new Error(response.statusText);
 }
 
@@ -57,7 +57,7 @@ const sendAll = async (items) => {
     let lastI = 0;
     try {
         for (var i = 0; i < items.length; i++) {
-            lastI = i + 1;
+            lastI = i;
             await sendit(items[i]);
             renderProgress(i / items.length);
         }
