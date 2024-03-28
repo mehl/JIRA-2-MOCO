@@ -2,14 +2,20 @@
     "name": "conrad-jira-2-moco",
     "version": "1.0.0",
     "description": "",
+    "type": "module",
     "main": "js/index.js",
     "author": "",
     "license": "ISC",
     "dependencies": {
         "ansi-colors": "^4.1.3",
         "drawille-canvas": "^1.2.1",
+        "ink": "^4.4.1",
         "prompts": "^2.4.2",
+        "react": "^18.2.0",
         "xlsx-parse-json": "^2.0.2",
         "xslx": "^1.0.0"
+    },
+    "devDependencies": {
+        "esbuild": "^0.20.2"
     }
 }

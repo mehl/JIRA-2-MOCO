@@ -1,5 +1,7 @@
-const Canvas = require("drawille-canvas");
-const colors = require("ansi-colors");
+import React from "react";
+import Canvas from "drawille-canvas";
+import colors from "ansi-colors";
+import { Box, Text } from "ink";
 
 const terminalCols = process.stdout.columns;
 const colConfig = [15, 15, 10, terminalCols - 60, 15];
@@ -41,22 +43,33 @@ const sepOnlyChar = (() => {
 })();
 
 
-module.exports = (result) => {
-
-    console.log(colors.blueBright.bold(table(["Projekt ID", "Task ID", "Stunden", "Beschreibung", "Datum"], " ", sepOnlyChar)));
-
-    console.log(table(["", "", "", "", ""], padChar, sepChar));
-
+export const Table = ({ items, offset = 0, limit = 500 }) => {
     let sum = 0;
-    for (var item of result) {
-        console.log(table([item.project_id, item.task_id, item.hours, item.description, item.date], padChar, sepChar));
+    for (var item of items) {
         sum += item.hours;
     }
-    console.log(table(["", "", "", "", ""], padChar, sepChar));
-    console.log(colors.blueBright.bold(table(["", "", sum, "", ""], " ", sepOnlyChar)));
-}
 
-function table(cols, padChar = " ", sepChar = " ") {
+    return <Box height={Math.min(limit, items.length) + 4}>
+        <Text>
+            {colors.blueBright.bold(table_row(["Projekt ID", "Task ID", "Stunden", "Beschreibung", "Datum"], " ", sepOnlyChar))}
+            {"\n"}
+            {table_row(["", "", "", "", ""], padChar, sepChar)}
+            {"\n"}
+            {items.map((item, index) => {
+                if (index < offset || index >= (offset + limit)) return <React.Fragment key={index}></React.Fragment>;
+                return <React.Fragment key={index}>
+                    {table_row([item.project_id, item.task_id, item.hours, item.description, item.date], padChar, sepChar)}
+                    {"\n"}
+                </React.Fragment>;
+            })}
+            {table_row(["", "", "", "", ""], padChar, sepChar)}
+            {"\n"}
+            {colors.blueBright.bold(table_row(["", "", sum, "", ""], " ", sepOnlyChar))}
+        </Text>
+    </Box>;
+};
+
+function table_row(cols, padChar = " ", sepChar = " ") {
     let result = "";
     for (var i = 0; i < cols.length; i++) {
         const s = cols[i] + "";

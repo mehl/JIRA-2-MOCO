@@ -1,6 +1,7 @@
-const XLSX = require("xlsx");
+import XLSX from "xlsx";
+import config from "./config";
+
 const { decode_range, encode_cell } = XLSX.utils;
-const config = require("./config");
 
 const namesConfig = {
     sheetName: "Zeitnachweise",
@@ -12,7 +13,7 @@ const namesConfig = {
     }
 };
 
-module.exports = (file) => {
+export default (file) => {
     const workbook = XLSX.readFile(file);
     const currentSheet = workbook.Sheets[namesConfig.sheetName];
     if (!currentSheet) throw new Error("No sheet found");

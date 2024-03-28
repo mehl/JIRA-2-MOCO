@@ -4,4 +4,4 @@ const config = {
     MOCO_TASK_ID: "xxx"
 };
 
-module.exports = config;
+export default config;
